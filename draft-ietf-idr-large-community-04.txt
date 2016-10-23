@@ -25,7 +25,7 @@ Abstract
    This document describes the Large BGP Communities attribute, an
    extension to BGP-4.  This attribute provides a mechanism to signal
    opaque information within separate namespaces to aid in routing
-   management.  The attribute is suitable for use in four-octet ASNs.
+   management.  The attribute is suitable for use with four-octet ASNs.
 
 Requirements Language
 
@@ -97,8 +97,8 @@ Table of Contents
    control the distribution of routing information.  Network operators
    attach BGP communities to routes to identify intrinsic properties of
    these routes.  These properties may include information such as the
-   route origin location, or specification of a routing policy action to
-   be taken, or one that has been taken, and may apply to an individual
+   route origin location, specification of a routing policy action to
+   be taken, or one that has been taken and may apply to an individual
    route or to a group of routes.  Because BGP communities are optional
    transitive BGP attributes, BGP communities may be acted upon or
    otherwise used by routing policies in other Autonomous Systems (ASes)
@@ -115,8 +115,8 @@ Internet-Draft            Large BGP Communities             October 2016
 
 
    Autonomous System Number (ASN) and the least significant word is a
-   locally defined value whose meaning is assigned by the operator of
-   the Autonomous System in the most significant word.
+   locally defined value the meaning of which is assigned by the
+   operator of the Autonomous System in the most significant word.
 
    Since the adoption of four-octet ASNs [RFC6793], the BGP Communities
    attribute can no longer accommodate the above encoding, as a two-
@@ -193,10 +193,10 @@ Internet-Draft            Large BGP Communities             October 2016
 4.  Canonical Representation
 
    Large BGP Communities MUST be represented as three separate unsigned
-   integers in decimal notation, without leading zeros, in the following
-   order: Global Administrator, Local Data 1, Local Data 2.  Numbers
-   MUST not be omitted, even when zero.  For example: 64496:4294967295:2
-   or 64496:0:0 or (64496, 111, 222).
+   integers in decimal notation in the following order: Global
+   Administrator, Local Data 1, Local Data 2.  Numbers MUST NOT contain
+   leading zeros, a zero value MUST be represented with a single zero.
+   For example: 64496:4294967295:2, 64496:0:0, or (64496, 111, 222).
 
 5.  Reserved Large BGP Community values
 
@@ -213,11 +213,11 @@ Internet-Draft            Large BGP Communities             October 2016
 
    The error handling of Large BGP Communities is as follows:
 
-   o  A Large BGP Communities attribute with a length of zero MUST be
-      ignored upon receipt and removed when sending.
+   o  A Large BGP Communities attribute with a length of zero MUST NOT be
+      sent and MUST be ignored upon receipt.
 
    o  A Large BGP Communities attribute SHALL be considered malformed if
-      its length is not a non-zero multiple of 12.
+      its length is not a multiple of 12.
 
 
 
@@ -244,12 +244,12 @@ Internet-Draft            Large BGP Communities             October 2016
    This document does not change any underlying security issues
    associated with any other BGP Communities mechanism.  Specifically,
    an AS relying on the Large BGP Communities attribute carried in BGP
-   must have trust in every other AS in the path, as any intermediate
-   Autonomous System in the path may have added, deleted or altered the
+   MUST have trust in every other AS in the path, as any intermediate
+   Autonomous System in the path may have added, deleted, or altered the
    Large BGP Communities attribute.  Specifying the mechanism to provide
    such trust is beyond the scope of this document.
 
-   Network administrators should note the recommendations in Section 11
+   Network administrators SHOULD follow the recommendations in Section 11
    of BGP Operations and Security [RFC7454].
 
 8.  Implementation status - RFC EDITOR: REMOVE BEFORE PUBLICATION
