@@ -115,7 +115,7 @@ Internet-Draft            Large BGP Communities             October 2016
 
 
    Autonomous System Number (ASN) and the least significant word is a
-   locally defined value the meaning of which is assigned by the
+   locally defined value, the meaning of which is assigned by the
    operator of the Autonomous System in the most significant word.
 
    Since the adoption of four-octet ASNs [RFC6793], the BGP Communities
